@@ -4,7 +4,6 @@ function Player(x, y, filename)
 	this.y = 10;
 	this.xVelocity = 0;
 	this.yVelocity = 0;
-	this.rect = new Rect(this.x,this.y,75,75);
 	this.isHorozontalMove = false;
 	this.isMoving = false;
 	this.img = new Image();
@@ -18,13 +17,13 @@ Player.prototype.Init = function()
 
 Player.prototype.update = function()
 {
-	this.rect.x = this.x;
-	this.rect.y = this.y;
+	this.img.x = this.x;
+	this.img.y = this.y;
 }
 
-Player.prototype.draw = function()
+Player.prototype.draw = function(ctx)
 {
-	c.drawImage(this.img, 0, 0, 200, 200, 
+	ctx.drawImage(this.img, 0, 0, 40, 55, 
 		this.x, this.y, this.radius, this.radius);
 	this.x+=this.xVelocity;
 	this.y+=this.yVelocity;
@@ -74,8 +73,6 @@ Player.prototype.moveDown = function()
 	this.isHorozontalMove = false;
 	this.isMoving = true;
 }
-
-
 Player.prototype.stopLeft = function()
 {
 	this.xVelocity = 0;

@@ -2,7 +2,8 @@
 function ScenePlaying()
 {
 	this.title = "Playing";
-	this.player = new Player(100, 100, "Images/Player.png");
+	this.player = new Player(200, 200, "Images/Player.png");
+
 }
 
 ScenePlaying.prototype.update = function()
@@ -12,16 +13,16 @@ ScenePlaying.prototype.update = function()
 
 ScenePlaying.prototype.draw = function()
 {
-	this.player.draw(canvas);
+	this.player.draw(ctx);
 }
 
-PlayingScene.prototype.handelInput = function(event)
+ScenePlaying.prototype.handelInput = function(event)
 {
+	console.log("wasd boy")
 	var key = getCharCode(event);
 	if(key == 68 || key == 39)
 	{
 		this.player.moveRight();
-
 	}
 	if(key == 65 || key == 37)
 	{
@@ -35,16 +36,14 @@ PlayingScene.prototype.handelInput = function(event)
 	{
 		this.player.moveDown();
 	}
-
 }
 
-PlayingScene.prototype.handelReleaseInput = function(event)
+ScenePlaying.prototype.handelReleaseInput = function(event)
 {
 	var key = getCharCode(event);
 	if(key == 68 || key == 39)
 	{
 		this.player.stopRight();
-
 	}
 	if(key == 65 || key == 37)
 	{
@@ -58,7 +57,6 @@ PlayingScene.prototype.handelReleaseInput = function(event)
 	{
 		this.player.stopDown();
 	}
-
 }
 
 ScenePlaying.prototype.Start = function()
@@ -72,7 +70,6 @@ ScenePlaying.prototype.Start = function()
 	{
 		self.handelReleaseInput(evt)
 	}, false);
-
 }
 
 ScenePlaying.prototype.Stop = function()

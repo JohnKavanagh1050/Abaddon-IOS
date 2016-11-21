@@ -6,9 +6,12 @@ function main()
 {
 	canvas = initCanvas();
 	ctx = canvas.getContext("2d");
-	scenePlaying = new ScenePlaying(canvas);
+	scenePlaying = new ScenePlaying();
+	scenePlaying.Start();
 	scenePlaying.update();
-	document.addEventListener("mousedown", changeScene);
+	update();
+	draw();
+	//document.addEventListener("mousedown", changeScene);
 }
 
 function update()
@@ -20,7 +23,7 @@ function update()
 function draw()
 {
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
-	scenePlaying.draw();
+	scenePlaying.draw(ctx);
 	window.requestAnimationFrame(draw);
 }
 
@@ -31,4 +34,22 @@ function initCanvas()
 	c.height = window.innerHeight;
 
 	return c;
+}
+
+
+//get the char code for a key press for difrent browsers as diffrent browsers may return odd or diffrent key codes
+function getCharCode(event)
+{
+	if (event.which == null)
+	{
+		return String.fromCharCode(event.keyCode) // IE
+	}
+	else if (event.which!=0 && event.charCode!=0)
+	{
+		return String.fromCharCode(event.which)   // the rest
+	} 
+	else
+	{
+		return event.keyCode; // special key
+	}
 }
