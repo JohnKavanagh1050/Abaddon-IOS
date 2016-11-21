@@ -23,8 +23,9 @@ Player.prototype.update = function()
 
 Player.prototype.draw = function(ctx)
 {
-	ctx.drawImage(this.img, 0, 0, 40, 55, 
-		this.x, this.y, this.radius, this.radius);
+	
+	//ctx.drawImage(this.img, 0, 0, 40, 55, 
+	//	this.x, this.y, this.radius, this.radius);
 	this.x+=this.xVelocity;
 	this.y+=this.yVelocity;
 	if(this.y <= 0)
@@ -43,6 +44,7 @@ Player.prototype.draw = function(ctx)
 	{
 		this.y = canvas.height-75;
 	}
+	ctx.drawImage(this.img, this.x,this.y,40,55);
 }
 
 Player.prototype.moveLeft = function()

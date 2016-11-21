@@ -1,8 +1,11 @@
+ScenePlaying.prototype = new Scene(); //Inherit from Scene
+
 
 function ScenePlaying()
 {
 	this.title = "Playing";
-	this.player = new Player(200, 200, "Images/Player.png");
+
+	this.player = new Player(200, 200, "Assets/Player.png");
 
 }
 
@@ -11,7 +14,7 @@ ScenePlaying.prototype.update = function()
 	this.player.update();
 }
 
-ScenePlaying.prototype.draw = function()
+ScenePlaying.prototype.draw = function(ctx)
 {
 	this.player.draw(ctx);
 }

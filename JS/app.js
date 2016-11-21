@@ -6,24 +6,23 @@ function main()
 {
 	canvas = initCanvas();
 	ctx = canvas.getContext("2d");
-	scenePlaying = new ScenePlaying();
-	scenePlaying.Start();
-	scenePlaying.update();
+	sceneManager = new SceneManager(canvas);
+	sceneManager.CurrentScene().update();
+	document.addEventListener("mousedown", changeScene);
 	update();
 	draw();
-	//document.addEventListener("mousedown", changeScene);
 }
 
 function update()
 {
-	scenePlaying.update();
+	sceneManager.currentScene.update();
 	window.requestAnimationFrame(update);
 }
 
 function draw()
 {
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
-	scenePlaying.draw(ctx);
+	sceneManager.currentScene.draw(ctx);
 	window.requestAnimationFrame(draw);
 }
 
@@ -36,6 +35,20 @@ function initCanvas()
 	return c;
 }
 
+
+function changeScene(e)
+{
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
+	// Random colour
+	var r = Math.random()*255;
+	var g = 0;
+	var b = 0;
+
+	// colour
+	ctx.fillStyle = rgb(r,g,b);
+	sceneManager.GoToNextScene();
+	
+}
 
 //get the char code for a key press for difrent browsers as diffrent browsers may return odd or diffrent key codes
 function getCharCode(event)
@@ -52,4 +65,17 @@ function getCharCode(event)
 	{
 		return event.keyCode; // special key
 	}
+}
+function rgb(r, g, b) 
+{ 
+	return 'rgb('+clamp(Math.round(r),0,255)+', '+clamp(Math.round(g),0,255)+', '+clamp(Math.round(b),0,255)+')';
+}
+function clamp(value, min, max)
+{ 
+	if(max<min) { 
+		var temp = min; 
+		min = max; 
+		max = temp; 
+	}
+	return Math.max(min, Math.min(value, max)); 
 }
