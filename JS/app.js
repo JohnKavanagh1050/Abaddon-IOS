@@ -35,6 +35,7 @@ function initCanvas()
 	return c;
 }
 
+
 function changeScene(e)
 {
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -49,11 +50,26 @@ function changeScene(e)
 	
 }
 
+//get the char code for a key press for difrent browsers as diffrent browsers may return odd or diffrent key codes
+function getCharCode(event)
+{
+	if (event.which == null)
+	{
+		return String.fromCharCode(event.keyCode) // IE
+	}
+	else if (event.which!=0 && event.charCode!=0)
+	{
+		return String.fromCharCode(event.which)   // the rest
+	} 
+	else
+	{
+		return event.keyCode; // special key
+	}
+}
 function rgb(r, g, b) 
 { 
 	return 'rgb('+clamp(Math.round(r),0,255)+', '+clamp(Math.round(g),0,255)+', '+clamp(Math.round(b),0,255)+')';
 }
-/*helper function*/
 function clamp(value, min, max)
 { 
 	if(max<min) { 
