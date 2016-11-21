@@ -6,17 +6,24 @@ function main()
 {
 	canvas = initCanvas();
 	ctx = canvas.getContext("2d");
+	sceneManager = new SceneManager(canvas);
+	sceneManager.CurrentScene().update();
 	document.addEventListener("mousedown", changeScene);
+	update();
+	draw();
 }
 
 function update()
 {
-	
+	sceneManager.currentScene.update();
+	window.requestAnimationFrame(update);
 }
 
 function draw()
 {
-	
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
+	sceneManager.currentScene.draw(ctx);
+	window.requestAnimationFrame(draw);
 }
 
 function initCanvas()
@@ -31,7 +38,7 @@ function initCanvas()
 function changeScene(e)
 {
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
-	// Random colou
+	// Random colour
 	var r = Math.random()*255;
 	var g = 0;
 	var b = 0;
